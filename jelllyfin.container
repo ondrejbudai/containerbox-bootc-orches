@@ -1,0 +1,17 @@
+[Container]
+Image=docker.io/jellyfin/jellyfin:10.10.7
+Volume=/var/mnt/data/jellyfin/config:/config:Z
+Volume=/var/mnt/data/jellyfin/cache:/cache:Z
+Volume=/var/mnt/data/jellyfin/media:/media:Z
+PublishPort=8096:8096
+PublishPort=8920:8920
+Network=main.network
+
+[Service]
+ExecStartPre=mkdir -p /var/mnt/data/jellyfin/config
+ExecStartPre=mkdir -p /var/mnt/data/jellyfin/cache
+ExecStartPre=mkdir -p /var/mnt/data/jellyfin/media
+Restart=always
+
+[Install]
+WantedBy=default.target
